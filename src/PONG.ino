@@ -33,11 +33,14 @@ bool rainbow=0;
 bool example=0;
 bool stopwatch=0;
 
+unsigned long prevtime=0;
+unsigned long tempo=30;
+int iter;
+
 bool start;
 int colorNr=0;
 
-int setHour=0;
-int setMinute=0;
+int bright=55;
 
 CRGBPalette16 currentPalette;
 TBlendType    currentBlending;
@@ -73,8 +76,6 @@ void setup() {
      }
      //rtc.adjust(DateTime(2019, 8, 18, 20, 10, 0));
 }
-
-int bright=55;
 void loop()
 {
     now = rtc.now();
@@ -92,7 +93,7 @@ void loop()
             delay(500);
           }
           if(example){
-            if(animacja<11)animacja++;
+            if(animacja<10)animacja++;
             else animacja=1;
             delay(500);
           }
@@ -113,6 +114,8 @@ void loop()
             stopwatch=1;
             start=0;
             animacja=8;
+            tempo=30;
+            iter=0;
           }else if(stopwatch){
             stopwatch=0;
             normal=1;
@@ -177,13 +180,24 @@ void loop()
           FastLED.show();
           FastLED.delay(1000 / UPDATES_PER_SECOND);
       }
-      int c=0;
+
       if(stopwatch){
+
+        unsigned long nowtime=millis();
         ChangePalettePeriodically();
         static uint8_t startIndex = 0;
-          startIndex = startIndex + 1; /* motion speed */
+          if(nowtime-prevtime>tempo){
+            startIndex = startIndex + 1;
+            prevtime=millis();
+            if(iter<50-tempo)iter++;
+            else{
+              iter=0;
+              tempo-=0.5;
+            }
+          }
 
-          FillLEDsFromPaletteColors( startIndex);
+
+          FillLEDsFromPaletteColors(startIndex);
 
         fStopwatch();
 
