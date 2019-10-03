@@ -54,11 +54,9 @@ void setup() {
     delay( 3000 ); // power-up safety delay
     FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
-
+    pinMode(0, OUTPUT);
     showStart();
 
-    pinMode(0, OUTPUT);
-    //showStart();
     pinMode(1, INPUT_PULLUP);
     pinMode(A3, INPUT_PULLUP);
     pinMode(A2, INPUT_PULLUP);
@@ -70,7 +68,7 @@ void setup() {
      if (! rtc.begin()) {
       error(1,1);
      }
-     //rtc.adjust(DateTime(2019, 8, 16, 17, 34, 0));  //fuckcja zmieniajaca czas
+     //rtc.adjust(DateTime(2019, 10, 3, 20, 36, 0));  //fuckcja zmieniajaca czas
      if (! rtc.isrunning()) {
        error(2,1);
      }
