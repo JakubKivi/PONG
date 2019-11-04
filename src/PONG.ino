@@ -2,6 +2,14 @@
 #include "../libraries/RTClib/RTClib.cpp"
 #include <FastLED.h>
 
+/*       !!! WIRING !!!
+            brown  - GND
+            red    - 5V
+            orange - RESET
+            yellow - SCK
+            green  - MISO
+            blue   - SCK
+*/
 const int Digits[10][10] =
 {
   {7,8,10,11,14,18,22,24},
@@ -68,7 +76,7 @@ void setup() {
      if (! rtc.begin()) {
       error(1,1);
      }
-     //rtc.adjust(DateTime(2019, 10, 3, 20, 36, 0));  //fuckcja zmieniajaca czas
+     //rtc.adjust(DateTime(2019, 11, 4, 23, 18, 0));  //fuckcja zmieniajaca czas
      if (! rtc.isrunning()) {
        error(2,1);
      }
