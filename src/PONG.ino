@@ -2,6 +2,10 @@
 #include "../libraries/RTClib/RTClib.cpp"
 #include <FastLED.h>
 
+
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(12, 11); // RX, TX
+
 /*       !!! WIRING !!!
             brown  - GND
             red    - 5V
@@ -40,12 +44,13 @@ bool service=0;
 bool rainbow=0;
 bool example=0;
 bool stopwatch=0;
+bool dino=0;
 
 unsigned long prevtime=0;
 unsigned long tempo=30;
 int iter;
 
-bool start;
+bool start=0;
 int colorNr=0;
 
 int bright=55;
@@ -81,36 +86,44 @@ void setup() {
        error(2,1);
      }
      //rtc.adjust(DateTime(2019, 8, 18, 20, 10, 0));
+     mySerial.begin(38400);
+
 }
+
 void loop()
 {
     now = rtc.now();
-
+    /*if (mySerial.available()){
+        showStart();
+    }*/
       if(digitalRead(1)==LOW){
-          if(bright<255)bright+=10;
-          else bright=5;
-          FastLED.setBrightness(  bright );
+          if(bright<5)bright+=1;
+          else if(bright<50)bright+=3;
+          else if(bright<155)bright+=7;
+          else if(bright<255)bright+=10;
+          else bright=1;
+          FastLED.setBrightness(bright);
           delay(50);
       }
       if(digitalRead(A1)==LOW){
-          if(normal||rainbow){
+          if(normal){
             if(colorNr<9)colorNr++;
             else colorNr=0;
             delay(500);
-          }
-          if(example){
+          }else if(rainbow){
+            colorNr==0?colorNr=9:colorNr=0;
+            delay(500);
+          }else if(example){
             if(animacja<10)animacja++;
             else animacja=1;
             delay(500);
-          }
-          if(stopwatch){
-            start?start=0:start=1;
           }
       }
       if(digitalRead(A3)==LOW){
           if(normal){
             normal=0;
             rainbow=1;
+            colorNr=0;
             animacja=1;
           }else if(rainbow){
             rainbow=0;
@@ -124,6 +137,13 @@ void loop()
             iter=0;
           }else if(stopwatch){
             stopwatch=0;
+            dino=1;
+            kaktusMillis=millis();
+            kI=0;
+            kIP=0;
+            n3=0;
+          }else if(dino){
+            dino=0;
             normal=1;
           }
           delay(500);
@@ -154,8 +174,7 @@ void loop()
         FastLED.show();
         FastLED.clear();
       }
-      if(rainbow){
-        delay(50);
+      else if(rainbow){
         ChangePalettePeriodically();
 
         static uint8_t startIndex = 0;
@@ -172,10 +191,10 @@ void loop()
         }
 
         FastLED.show();
-        FastLED.clear();
+        FastLED.delay(1000 / UPDATES_PER_SECOND);
       }
 
-      if(example){
+      else if(example){
           ChangePalettePeriodically();
 
           static uint8_t startIndex = 0;
@@ -187,25 +206,12 @@ void loop()
           FastLED.delay(1000 / UPDATES_PER_SECOND);
       }
 
-      if(stopwatch){
-
-        unsigned long nowtime=millis();
-        ChangePalettePeriodically();
-        static uint8_t startIndex = 0;
-          if(nowtime-prevtime>tempo){
-            startIndex = startIndex + 1;
-            prevtime=millis();
-            if(iter<50-tempo)iter++;
-            else{
-              iter=0;
-              tempo-=0.5;
-            }
-          }
-
-
-          FillLEDsFromPaletteColors(startIndex);
-
+      else if(stopwatch){
         fStopwatch();
+      }
+      else if(dino){
+
+        fDino();
 
       }
 
