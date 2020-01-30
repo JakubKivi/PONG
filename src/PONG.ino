@@ -4,7 +4,12 @@
 
 
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(12, 11); // RX, TX
+
+#define rxPin 11
+#define txPin 12
+
+// set up a new serial port
+SoftwareSerial mySerial =  SoftwareSerial(rxPin, txPin);
 
 /*       !!! WIRING !!!
             brown  - GND
@@ -64,7 +69,13 @@ extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 #include "functions.h"
 
 void setup() {
-    delay( 3000 ); // power-up safety delay
+    delay( 1000 ); // power-up safety delay
+
+    pinMode(rxPin, INPUT);
+    pinMode(txPin, OUTPUT);
+    // set the data rate for the SoftwareSerial port
+    mySerial.begin(9600);
+
     FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
     pinMode(0, OUTPUT);
@@ -81,21 +92,21 @@ void setup() {
      if (! rtc.begin()) {
       error(1,1);
      }
-     //rtc.adjust(DateTime(2019, 11, 4, 23, 18, 0));  //fuckcja zmieniajaca czas
+     //rtc.adjust(DateTime(2020, 1, 30, 16, 32, 0));  //fuckcja zmieniajaca czas
      if (! rtc.isrunning()) {
        error(2,1);
      }
-     //rtc.adjust(DateTime(2019, 8, 18, 20, 10, 0));
-     mySerial.begin(38400);
+
 
 }
 
 void loop()
 {
     now = rtc.now();
-    /*if (mySerial.available()){
-        showStart();
-    }*/
+    if (mySerial.available() > 0) {
+        char c = mySerial.read();
+        if(c=='a')showStart();
+    }
       if(digitalRead(1)==LOW){
           if(bright<5)bright+=1;
           else if(bright<50)bright+=3;
