@@ -9,16 +9,16 @@ void showStart(){
 
 void error(int a, bool b){
   for(int i=0; i<a; i++){
-    digitalWrite(0, 1);
+    digitalWrite(13, 1);
     delay(500);
-    digitalWrite(0, 0);
+    digitalWrite(13, 0);
     delay(500);
   }
   while(b){
     for(int i=0; i<a; i++){
-    digitalWrite(0, 1);
+    digitalWrite(13, 1);
     delay(500);
-    digitalWrite(0, 0);
+    digitalWrite(13, 0);
     delay(500);
   }
   delay(3000);

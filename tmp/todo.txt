@@ -1,0 +1,7 @@
+kupić:
+
+ keypad https://botland.com.pl/klawiatury-arduino/17119-klawiatura-membranowa-samoprzylepna-4x4-16-klawiszy-5903351247870.html
+
+ CR1225
+ 
+ 

@@ -1,0 +1,74 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "c:/Users/Kivi/Documents/git/PONG/include",
+                "c:/Users/Kivi/Documents/git/PONG/src",
+                "c:/Users/Kivi/Documents/git/PONG/.pio/libdeps/uno/RTClib/src",
+                "c:/Users/Kivi/Documents/git/PONG/.pio/libdeps/uno/Adafruit BusIO",
+                "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "c:/Users/Kivi/Documents/git/PONG/.pio/libdeps/uno/FastLED/src",
+                "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs",
+                "C:/Users/Kivi/Documents/Arduino/libraries/Keypad/src",
+                "C:/Users/Kivi/Documents/Arduino/libraries/PalatisSoftPWM",
+                "C:/Users/Kivi/Documents/Arduino/libraries/RTC/src",
+                "C:/Users/Kivi/Documents/Arduino/libraries/arduino-softpwm/src",
+                "C:/Users/Kivi/Documents/Arduino/libraries/extEEPROM",
+                "C:/Users/Kivi/Documents/Arduino/libraries/turicas-DS1307-6b13273",
+                "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "c:/Users/Kivi/Documents/git/PONG/include",
+                    "c:/Users/Kivi/Documents/git/PONG/src",
+                    "c:/Users/Kivi/Documents/git/PONG/.pio/libdeps/uno/RTClib/src",
+                    "c:/Users/Kivi/Documents/git/PONG/.pio/libdeps/uno/Adafruit BusIO",
+                    "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    "c:/Users/Kivi/Documents/git/PONG/.pio/libdeps/uno/FastLED/src",
+                    "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs",
+                    "C:/Users/Kivi/Documents/Arduino/libraries/Keypad/src",
+                    "C:/Users/Kivi/Documents/Arduino/libraries/PalatisSoftPWM",
+                    "C:/Users/Kivi/Documents/Arduino/libraries/RTC/src",
+                    "C:/Users/Kivi/Documents/Arduino/libraries/arduino-softpwm/src",
+                    "C:/Users/Kivi/Documents/Arduino/libraries/extEEPROM",
+                    "C:/Users/Kivi/Documents/Arduino/libraries/turicas-DS1307-6b13273",
+                    "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60118",
+                "ARDUINO_AVR_NANO",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega328P__",
+                ""
+            ],
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++11",
+            "compilerPath": "C:/Users/Kivi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=atmega328p",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

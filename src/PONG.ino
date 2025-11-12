@@ -1,24 +1,8 @@
 #include <Wire.h>
-#include "../libraries/RTClib/RTClib.cpp"
 #include <FastLED.h>
+#include <RTClib.h>
 
 
-#include <SoftwareSerial.h>
-
-#define rxPin 11
-#define txPin 12
-
-// set up a new serial port
-SoftwareSerial mySerial =  SoftwareSerial(rxPin, txPin);
-
-/*       !!! WIRING !!!
-            brown  - GND
-            red    - 5V
-            orange - RESET
-            yellow - SCK
-            green  - MISO
-            blue   - SCK
-*/
 const int Digits[10][10] =
 {
   {7,8,10,11,14,18,22,24},
@@ -33,16 +17,18 @@ const int Digits[10][10] =
   {7,9,10,11,14,16,17,24},
 };
 
-#define LED_PIN     A0
+#define LED_PIN     2
 #define NUM_LEDS    128
-#define BRIGHTNESS  55
+#define BRIGHTNESS  10
 #define LED_TYPE    WS2811
 #define COLOR_ORDER GRB
+
 CRGB leds[NUM_LEDS];
 RTC_DS1307 rtc;
 #define UPDATES_PER_SECOND 100
 DateTime now;
 CRGB chosenColor = 0xFFFFFF;
+
 int animacja=1;
 bool normal=1;
 bool service=0;
@@ -69,25 +55,12 @@ extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 #include "functions.h"
 
 void setup() {
-    delay( 1000 ); // power-up safety delay
+    delay( 100 ); // power-up safety delay
 
-    pinMode(rxPin, INPUT);
-    pinMode(txPin, OUTPUT);
-    // set the data rate for the SoftwareSerial port
-    mySerial.begin(9600);
+    Serial.begin(9600);
 
     FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
-    pinMode(0, OUTPUT);
-    showStart();
-
-    pinMode(1, INPUT_PULLUP);
-    pinMode(A3, INPUT_PULLUP);
-    pinMode(A2, INPUT_PULLUP);
-    pinMode(A1, INPUT_PULLUP);
-
-    currentPalette = RainbowColors_p;
-    currentBlending = LINEARBLEND;
 
      if (! rtc.begin()) {
       error(1,1);
@@ -103,10 +76,12 @@ void setup() {
 void loop()
 {
     now = rtc.now();
-    if (mySerial.available() > 0) {
-        char c = mySerial.read();
-        if(c=='a')showStart();
-    }
+    Serial.println(now.timestamp());
+    displaynumber(0,10, chosenColor);
+    displaynumber(70,30, chosenColor);
+    delay(1000);
+}
+    /*
       if(digitalRead(1)==LOW){
           if(bright<5)bright+=1;
           else if(bright<50)bright+=3;
@@ -189,7 +164,7 @@ void loop()
         ChangePalettePeriodically();
 
         static uint8_t startIndex = 0;
-        startIndex = startIndex + 1; /* motion speed */
+        startIndex = startIndex + 1; 
 
         FillLEDsFromPaletteColors( startIndex);
         displaynumber(0,now.hour(), chosenColor);
@@ -209,7 +184,7 @@ void loop()
           ChangePalettePeriodically();
 
           static uint8_t startIndex = 0;
-          startIndex = startIndex + 1; /* motion speed */
+          startIndex = startIndex + 1;
 
           FillLEDsFromPaletteColors( startIndex);
 
@@ -224,9 +199,8 @@ void loop()
 
         fDino();
 
-      }
+      }*/
 
-}
 
 void FillLEDsFromPaletteColors( uint8_t colorIndex)
 {
