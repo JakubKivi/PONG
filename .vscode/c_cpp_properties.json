@@ -10,9 +10,9 @@
             "includePath": [
                 "c:/Users/Kivi/Documents/git/PONG/include",
                 "c:/Users/Kivi/Documents/git/PONG/src",
-                "C:/Users/Kivi/Documents/Arduino/libraries/Keypad/src",
                 "C:/Users/Kivi/Documents/Arduino/libraries/RTC/src",
                 "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "C:/Users/Kivi/Documents/Arduino/libraries/Keypad/src",
                 "c:/Users/Kivi/Documents/git/PONG/.pio/libdeps/uno/FastLED/src",
                 "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                 "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
@@ -33,9 +33,9 @@
                 "path": [
                     "c:/Users/Kivi/Documents/git/PONG/include",
                     "c:/Users/Kivi/Documents/git/PONG/src",
-                    "C:/Users/Kivi/Documents/Arduino/libraries/Keypad/src",
                     "C:/Users/Kivi/Documents/Arduino/libraries/RTC/src",
                     "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    "C:/Users/Kivi/Documents/Arduino/libraries/Keypad/src",
                     "c:/Users/Kivi/Documents/git/PONG/.pio/libdeps/uno/FastLED/src",
                     "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                     "C:/Users/Kivi/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",

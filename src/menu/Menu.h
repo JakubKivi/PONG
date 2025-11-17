@@ -10,7 +10,7 @@
 #include "logic/DateStruct.h"
 
 enum MenuScreen { TIME, SETTINGS, GAME, ANIMATIONS};
-enum MenuSubScreen {COLOR, CURRENT_TIME};
+enum MenuSubScreen {COLOR, BRIGHTNESS, CURRENT_TIME};
 
 class Menu {
 private:
@@ -22,7 +22,8 @@ private:
     int errorLedPin;
 
     MenuScreen currentScreen = TIME;
-    MenuSubScreen currentSubScreen = CURRENT_TIME;      
+    MenuSubScreen currentSubScreen = COLOR;    
+    bool isSubmenu = false;  
 
     TimeStruct currentTime;
     DateStruct currentDate;
@@ -31,12 +32,17 @@ private:
 
     bool isAutoBrightness = true;
     bool isBacklightOn = false;
-    bool isBacklightrainbow = false;
+    bool isBacklightAnimation = false;
 
     int currentAnimationIndex = 0;
 
-    bool isSubmenu = false;
-    bool isEditing = false;
+    CRGB currenColor = CRGB::White;
+    int currentInputColorIndex =0;
+
+    unsigned long lastUpdate_Time = 0;
+    unsigned long lastUpdate_Fotoresistor = 0; // 1 minute
+
+    int manualBrightness = 150;
 
     void displayScreen();
 

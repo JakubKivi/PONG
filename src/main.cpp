@@ -3,7 +3,7 @@
 #include <Keypad.h>
 #include <fastled.h>
 
-#include "ui/Menu.h"
+#include "menu/Menu.h"
 
 #define LED_PIN     2
 #define NUM_LEDS    128
@@ -65,29 +65,14 @@ void loop()
     char key = keypad.getKey();
 
     if (key)
-    {
+    {   
+        digitalWrite(ERROR_LED_PIN, HIGH);
+        delay(50);
+        digitalWrite(ERROR_LED_PIN, LOW);
         menu.update(key);
     }
 
     menu.updateTime();
-    delay(200);
-  
-    // tm now = RTC.getDateTime();
-    // Serial.print("Current Date: ");
-    // Serial.print(now.tm_mday);  
-    // Serial.print("/");
-    // Serial.print(now.tm_mon);
-    // Serial.print("/");
-    // Serial.print(now.tm_year + 1900);
-    // Serial.print("  ");
-    // Serial.print("Current Time: ");
-    // Serial.print(now.tm_hour);
-    // Serial.print(":");
-    // Serial.print(now.tm_min);
-    // Serial.print(":");
-    // Serial.println(now.tm_sec);
-
-    // delay(1000);
-
-
+    FastLED.show();
+    delay(100);
 }

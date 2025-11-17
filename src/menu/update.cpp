@@ -1,0 +1,152 @@
+#include "Menu.h"
+#include "logic/TimeStruct.h"
+
+void Menu::update(char key){  
+    Serial.print("Key pressed: ");
+    Serial.println(key);       
+    if (isSubmenu)
+    {
+        if(key>='0' && key<='9'){
+            inputBuffer += key;
+
+        }else if(key=='#'){
+            inputBuffer = "";
+
+        }else if(key=='*'){
+            int value = inputBuffer.toInt();
+            if ( value <0 )
+                value = 0;
+            if ( value >255 )
+                value = 255;
+            if (currentSubScreen==COLOR)
+            {
+                switch (currentInputColorIndex)
+                {
+                case 0:
+                    currenColor.r = value;
+                    currentInputColorIndex = 1;
+                    break;
+                case 1:
+                    currenColor.g = value;
+                    currentInputColorIndex = 2;
+                    break;
+                case 2:
+                    currenColor.b = value;
+                    currentInputColorIndex = 0;
+                    break;
+                default:
+                    break;
+                }
+                inputBuffer = "";
+
+            }else if(currentSubScreen==BRIGHTNESS)
+            {
+                manualBrightness = value;
+                inputBuffer = "";
+            }else if (currentSubScreen==CURRENT_TIME)
+            {
+                TimeStruct value(
+                    (inputBuffer.toInt()-inputBuffer.toInt() % 100)/100, 
+                    inputBuffer.toInt() % 100);
+
+                RTC->setTime(value.hour, value.minute, 0);
+                inputBuffer = "";
+            }
+
+        }else if(key=='D'){
+                isSubmenu = false;
+        }     
+    }else{
+        if(key=='D'){
+            currentScreen = static_cast<MenuScreen>((currentScreen + 1) % 4);
+            return;
+        }
+        if (currentScreen==TIME)
+        {
+            switch (key)
+            {
+                case 'A':
+                    isAutoBrightness= !isAutoBrightness;
+                    break;
+                case 'B':
+                    isBacklightOn = !isBacklightOn;
+                    break;
+                case 'C':
+                    isBacklightAnimation = !isBacklightAnimation;
+                    break;  
+                default:
+                    break;
+            }
+        }else if (currentScreen==SETTINGS){
+            switch (key)
+            {
+                case 'A':
+                    isSubmenu = true;
+                    currentSubScreen = COLOR;
+                break; 
+                case 'B':
+                    isSubmenu = true;
+                    currentSubScreen = BRIGHTNESS;
+                break;   
+                case 'C':
+                    isSubmenu = true;
+                    currentSubScreen = CURRENT_TIME;
+                break;     
+                default:
+                    break;
+            }  
+        }else if (currentScreen==GAME){
+            switch (key)
+            {        
+                default:
+                    break;
+            }   
+        }else if (currentScreen==ANIMATIONS){
+            switch (key)
+            {
+                case 'A':
+                    currentAnimationIndex += 1;
+                    break;   
+                case 'B':
+                    currentAnimationIndex>0 ? currentAnimationIndex -= 1 : currentAnimationIndex = 0;                    
+                    break;
+                case 'C':
+                    break;
+                case '*':
+                    currentAnimationIndex = constrain(inputBuffer.toInt(), 0, 100);
+                    inputBuffer = "";
+                    break;
+                case '#':
+                    inputBuffer = "";
+                    break;
+                default:
+                    inputBuffer += key;
+                    break;
+            }   
+        }           
+    }    
+}
+
+void Menu::updateTime(){
+    unsigned long mils = millis();
+
+    if (mils - lastUpdate_Time >= 1000) { 
+        lastUpdate_Time = mils;
+        
+        tm now = RTC->getDateTime();
+        currentTime.hour = now.tm_hour;
+        currentTime.minute = now.tm_min;
+        currentDate.day = now.tm_mday;
+        currentDate.month = now.tm_mon;
+        currentDate.year = now.tm_year + 1900;
+        
+        if (isAutoBrightness)
+        {
+            FastLED.setBrightness(constrain(map(analogRead(fotresistorPin), 30, 1000, 50, 255) , 50, 255));
+        }else{
+            FastLED.setBrightness(manualBrightness);
+        }
+    }  
+
+    displayScreen();
+}
