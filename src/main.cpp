@@ -20,6 +20,8 @@ static DS1307 RTC;
 const byte ROWS = 4; //four rows
 const byte COLS = 4; //three columns
 
+
+
 char keys[ROWS][COLS] = {
   {'1','2','3', 'A'},
   {'4','5','6', 'B'},
@@ -72,7 +74,11 @@ void loop()
         menu.update(key);
     }
 
+    menu.displayNumber(0, menu.getCurrentTime().hour, CRGB::Red);
+    menu.displayNumber(70, menu.getCurrentTime().minute, CRGB::Red);
+
     menu.updateTime();
     FastLED.show();
     delay(100);
+    FastLED.clear();
 }

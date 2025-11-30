@@ -30,7 +30,7 @@ private:
 
     String inputBuffer = "";
 
-    bool isAutoBrightness = true;
+    bool isAutoBrightness = false;  //TODO zmienić na true!!!!!!!!!!
     bool isBacklightOn = false;
     bool isBacklightAnimation = false;
 
@@ -42,11 +42,13 @@ private:
     unsigned long lastUpdate_Time = 0;
     unsigned long lastUpdate_Fotoresistor = 0; // 1 minute
 
-    int manualBrightness = 150;
+    int manualBrightness = 15;
 
     void displayScreen();
 
+
 public:
+    void displayNumber( int place , int number, CRGB c);
 
     Menu(Keypad* keypad,DS1307* RTC, CRGB (&leds)[128], int fotresistorPin, int errorLedPin);
 

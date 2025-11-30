@@ -24,19 +24,19 @@ void Menu::displayScreen(){
         switch (currentScreen)
         {
             case TIME:
-                Serial.print("Time:");
-                Serial.print(currentTime.hour);
-                Serial.print(":");  
-                Serial.print(currentTime.minute);
-                Serial.print("       ");
-                Serial.print("autoBrightness:");
-                Serial.print(isAutoBrightness ? "ON":"OFF");
-                Serial.print("  backlight:");
-                Serial.print(isBacklightOn ? "ON":"OFF");
-                Serial.print("  rainbow:");
-                Serial.print(isBacklightAnimation ? "ON":"OFF");
-                Serial.print("Color: ");
-                Serial.println(String(currenColor.r)+"," + String(currenColor.g) + "," + String(currenColor.b));
+                // Serial.print("Time:");
+                // Serial.print(currentTime.hour);
+                // Serial.print(":");  
+                // Serial.print(currentTime.minute);
+                // Serial.print("       ");
+                // Serial.print("autoBrightness:");
+                // Serial.print(isAutoBrightness ? "ON":"OFF");
+                // Serial.print("  backlight:");
+                // Serial.print(isBacklightOn ? "ON":"OFF");
+                // Serial.print("  rainbow:");
+                // Serial.print(isBacklightAnimation ? "ON":"OFF");
+                // Serial.print("Color: ");
+                // Serial.println(String(currenColor.r)+"," + String(currenColor.g) + "," + String(currenColor.b));
                 break;
             case SETTINGS:
                 Serial.println("Settings Menu");
