@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <Keypad.h>
 #include <fastled.h>
+#include "logic/getLedIndex.h"
 
 #include "menu/Menu.h"
 
@@ -19,8 +20,6 @@ static DS1307 RTC;
 
 const byte ROWS = 4; //four rows
 const byte COLS = 4; //three columns
-
-
 
 char keys[ROWS][COLS] = {
   {'1','2','3', 'A'},
@@ -74,10 +73,57 @@ void loop()
         menu.update(key);
     }
 
-    menu.displayNumber(0, menu.getCurrentTime().hour, CRGB::Red);
-    menu.displayNumber(70, menu.getCurrentTime().minute, CRGB::Red);
-
     menu.updateTime();
+
+    // for(int i=0; i<17; i++){
+    //     leds[getLedIndex(0,i)] = CRGB(0,15,0); 
+    //     FastLED.show();
+    //     delay(10);
+    //     FastLED.clear();
+    // }
+    // for(int i=17; i>=0; i--){
+    //     leds[getLedIndex(1,i)] = CRGB(0,15,0); 
+    //     FastLED.show();
+    //     delay(10);
+    //     FastLED.clear();
+    // }
+    // for(int i=0; i<19; i++){
+    //     leds[getLedIndex(2,i)] = CRGB(0,15,0); 
+    //     FastLED.show();
+    //     delay(10);
+    //     FastLED.clear();
+    // }
+    // for(int i=19; i>=0; i--){
+    //     leds[getLedIndex(3,i)] = CRGB(0,15,0); 
+    //     FastLED.show();
+    //     delay(10);
+    //     FastLED.clear();
+    // }
+    // for(int i=0; i<19; i++){
+    //     leds[getLedIndex(4,i)] = CRGB(0,15,0); 
+    //     FastLED.show();
+    //     delay(10);
+    //     FastLED.clear();
+    // }
+    // for(int i=17; i>=0; i--){
+    //     leds[getLedIndex(5,i)] = CRGB(0,15,0); 
+    //     FastLED.show();
+    //     delay(10);
+    //     FastLED.clear();
+    // }
+    // for(int i=0; i<17; i++){
+    //     leds[getLedIndex(6,i)] = CRGB(0,15,0); 
+    //     FastLED.show();
+    //     delay(10);
+    //     FastLED.clear();
+    // }
+    // delay(2000000);
+
+
+    // Serial.print("Index: ");
+    // int a = getLedIndex(2,17);
+    // Serial.println(a);
+    // leds[a] = CRGB(0,15,0); 
     FastLED.show();
     delay(100);
     FastLED.clear();

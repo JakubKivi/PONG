@@ -24,26 +24,30 @@ void Menu::displayScreen(){
         switch (currentScreen)
         {
             case TIME:
-                // Serial.print("Time:");
-                // Serial.print(currentTime.hour);
-                // Serial.print(":");  
-                // Serial.print(currentTime.minute);
-                // Serial.print("       ");
-                // Serial.print("autoBrightness:");
-                // Serial.print(isAutoBrightness ? "ON":"OFF");
-                // Serial.print("  backlight:");
-                // Serial.print(isBacklightOn ? "ON":"OFF");
-                // Serial.print("  rainbow:");
-                // Serial.print(isBacklightAnimation ? "ON":"OFF");
-                // Serial.print("Color: ");
-                // Serial.println(String(currenColor.r)+"," + String(currenColor.g) + "," + String(currenColor.b));
+                displayNumber(0, currentTime.hour, currenColor);
+                displayNumber(70, currentTime.minute, currenColor);// Serial.println(String(currenColor.r)+"," + String(currenColor.g) + "," + String(currenColor.b));
                 break;
             case SETTINGS:
-                Serial.println("Settings Menu");
-                break;
-            case GAME:
-                Serial.println("Game Menu");
-                break;     
+                leds[getLedIndex(0,8)] = currenColor;
+                leds[getLedIndex(0,9)] = currenColor;
+                leds[getLedIndex(0,10)] = currenColor;
+
+                leds[getLedIndex(1,7)] = currenColor;
+                leds[getLedIndex(1,12)] = currenColor;
+
+                leds[getLedIndex(2,7)] = currenColor;
+                leds[getLedIndex(2,13)] = currenColor;
+                
+                leds[getLedIndex(4,7)] = currenColor;
+                leds[getLedIndex(4,13)] = currenColor;
+
+                leds[getLedIndex(5,7)] = currenColor;
+                leds[getLedIndex(5,12)] = currenColor;
+
+                leds[getLedIndex(6,8)] = currenColor;
+                leds[getLedIndex(6,9)] = currenColor;
+                leds[getLedIndex(6,10)] = currenColor;
+                break;   
             case ANIMATIONS:
                 Serial.print("Showing Animation: ");
                 Serial.println(currentAnimationIndex);

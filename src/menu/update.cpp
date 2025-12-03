@@ -58,7 +58,7 @@ void Menu::update(char key){
         }     
     }else{
         if(key=='D'){
-            currentScreen = static_cast<MenuScreen>((currentScreen + 1) % 4);
+            currentScreen = static_cast<MenuScreen>((currentScreen + 1) % 3);
             return;
         }
         if (currentScreen==TIME)
@@ -95,12 +95,6 @@ void Menu::update(char key){
                 default:
                     break;
             }  
-        }else if (currentScreen==GAME){
-            switch (key)
-            {        
-                default:
-                    break;
-            }   
         }else if (currentScreen==ANIMATIONS){
             switch (key)
             {

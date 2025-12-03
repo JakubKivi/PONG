@@ -8,8 +8,9 @@
 #include <fastled.h>
 #include "logic/TimeStruct.h"
 #include "logic/DateStruct.h"
+#include "logic/getLedIndex.h"
 
-enum MenuScreen { TIME, SETTINGS, GAME, ANIMATIONS};
+enum MenuScreen { TIME, SETTINGS, ANIMATIONS};
 enum MenuSubScreen {COLOR, BRIGHTNESS, CURRENT_TIME};
 
 class Menu {
@@ -36,7 +37,7 @@ private:
 
     int currentAnimationIndex = 0;
 
-    CRGB currenColor = CRGB::White;
+    CRGB currenColor = CRGB::Red;
     int currentInputColorIndex =0;
 
     unsigned long lastUpdate_Time = 0;
