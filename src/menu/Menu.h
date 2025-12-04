@@ -37,19 +37,21 @@ private:
 
     int currentAnimationIndex = 0;
 
-    CRGB currenColor = CRGB::Red;
+    CRGB currentColor = CRGB::Red;
     int currentInputColorIndex =0;
 
     unsigned long lastUpdate_Time = 0;
-    unsigned long lastUpdate_Fotoresistor = 0; // 1 minute
+    unsigned long lastBlinking_Time = 0;
+    bool blinkState = false;
 
     int manualBrightness = 15;
 
     void displayScreen();
-
+    
+    void displayNumber( int place , int number, CRGB c);
+    void displayLongNumber( int place , int number, CRGB c);
 
 public:
-    void displayNumber( int place , int number, CRGB c);
 
     Menu(Keypad* keypad,DS1307* RTC, CRGB (&leds)[128], int fotresistorPin, int errorLedPin);
 

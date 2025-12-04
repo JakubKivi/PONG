@@ -8,37 +8,41 @@ void Menu::update(char key){
     {
         if(key>='0' && key<='9'){
             inputBuffer += key;
-
+            if(inputBuffer.length()>3){
+                inputBuffer="";
+            }
+            
         }else if(key=='#'){
             inputBuffer = "";
 
         }else if(key=='*'){
             int value = inputBuffer.toInt();
-            if ( value <0 )
-                value = 0;
+            if ( value <3 )
+                value = 3;
             if ( value >255 )
                 value = 255;
             if (currentSubScreen==COLOR)
             {
-                switch (currentInputColorIndex)
-                {
-                case 0:
-                    currenColor.r = value;
-                    currentInputColorIndex = 1;
-                    break;
-                case 1:
-                    currenColor.g = value;
-                    currentInputColorIndex = 2;
-                    break;
-                case 2:
-                    currenColor.b = value;
-                    currentInputColorIndex = 0;
-                    break;
-                default:
-                    break;
+                if(inputBuffer.length()==0){
+                    //do nothing
+                }else{
+                    switch (currentInputColorIndex)
+                    {
+                    case 0:
+                        currentColor.r = value;
+                        break;
+                    case 1:
+                        currentColor.g = value;
+                        break;
+                    case 2:
+                        currentColor.b = value;
+                        break;
+                    default:
+                        break;
+                    }
                 }
                 inputBuffer = "";
-
+                currentInputColorIndex = (currentInputColorIndex + 1) % 3;
             }else if(currentSubScreen==BRIGHTNESS)
             {
                 manualBrightness = value;
@@ -55,6 +59,7 @@ void Menu::update(char key){
 
         }else if(key=='D'){
                 isSubmenu = false;
+                inputBuffer = "";
         }     
     }else{
         if(key=='D'){

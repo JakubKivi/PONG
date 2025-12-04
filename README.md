@@ -13,14 +13,12 @@ Button **D** cycles through the main screens (loop: Time -> Settings -> Animatio
   - `A` – Toggle **Auto Brightness**
   - `B` – Toggle **Backlight**
   - `C` – Toggle **Background Animation**
-  - `D` – Next screen (_Settings_)
 
 - **⚙️ Screen: SETTINGS**
 
   - `A` – Submenu: **Color**
   - `B` – Submenu: **Brightness**
   - `C` – Submenu: **Time**
-  - `D` – Next screen (_Animation_)
 
 - **✨ Screen: ANIMATION**
   - `A` – Next animation (+1)

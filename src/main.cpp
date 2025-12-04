@@ -125,6 +125,6 @@ void loop()
     // Serial.println(a);
     // leds[a] = CRGB(0,15,0); 
     FastLED.show();
-    delay(100);
+    delay(10);
     FastLED.clear();
 }

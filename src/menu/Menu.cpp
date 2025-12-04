@@ -75,7 +75,32 @@ void Menu::displayNumber(int place, int number, CRGB c) {
             leds[(pos1 + place)] = c;
         }
         if (pos2 != 0) {
-            leds[(pos2 + 28 + place)] = c; // Sprawdź czy offset 28 jest na pewno dobry dla Twojego paska!
+            leds[(pos2 + 28 + place)] = c; 
+        }
+    }
+}
+
+void Menu::displayLongNumber(int place, int number, CRGB c) {
+
+    int hundreds = (number / 100) % 10;
+    int tens = (number / 10) % 10;
+    int units = number % 10;
+
+    for (int i = 0; i < 10; i++) {
+        uint8_t posH = pgm_read_byte(&Digits[hundreds][i]);
+        uint8_t posT = pgm_read_byte(&Digits[tens][i]);
+        uint8_t posU = pgm_read_byte(&Digits[units][i]);
+
+        if ((number >= 100 ) && posH != 0) {
+            leds[(posH + place)] = c;
+        }
+
+        if ((number >= 10 ) && posT != 0) {
+            leds[(posT + 28 + place)] = c; 
+        }
+
+        if (posU != 0) {
+            leds[(posU + 56 + place)] = c; 
         }
     }
 }
