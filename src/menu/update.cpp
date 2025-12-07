@@ -8,7 +8,8 @@ void Menu::update(char key){
     {
         if(key>='0' && key<='9'){
             inputBuffer += key;
-            if(inputBuffer.length()>3){
+            if((inputBuffer.length()>3 and currentSubScreen!=CURRENT_TIME )or
+               inputBuffer.length()>4){
                 inputBuffer="";
             }
             
@@ -47,6 +48,7 @@ void Menu::update(char key){
             {
                 manualBrightness = value;
                 inputBuffer = "";
+                isSubmenu = false;
             }else if (currentSubScreen==CURRENT_TIME)
             {
                 TimeStruct value(
@@ -55,6 +57,7 @@ void Menu::update(char key){
 
                 RTC->setTime(value.hour, value.minute, 0);
                 inputBuffer = "";
+                isSubmenu = false;
             }
 
         }else if(key=='D'){

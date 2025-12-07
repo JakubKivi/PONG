@@ -65,6 +65,20 @@ const uint8_t Digits[10][10] PROGMEM =
   {7,9,10,11,14,16,17,24},
 };
 
+const uint8_t DigitsShifted[10][10] PROGMEM =
+{
+  {1,2,4,5,8,18,16,12},
+  {8,18,10,8,12},
+  {1,12,16,10,3,4,5,8},
+  {1,12,16,10,3,18,8,5},
+  {1,2,3,10,16,18,8},
+  {12,1,2,3,10,18,8,5},
+  {1,2,3,4,5,8,18,10,12},
+  {1,12,16,10,9,5},
+  {1,2,3,4,5,8,18,10,16,12},
+  {1,2,3,5,8,18,10,16,12},
+};
+
 void Menu::displayNumber(int place, int number, CRGB c) {
 
     for (int i = 0; i < 10; i++) {
@@ -87,9 +101,9 @@ void Menu::displayLongNumber(int place, int number, CRGB c) {
     int units = number % 10;
 
     for (int i = 0; i < 10; i++) {
-        uint8_t posH = pgm_read_byte(&Digits[hundreds][i]);
-        uint8_t posT = pgm_read_byte(&Digits[tens][i]);
-        uint8_t posU = pgm_read_byte(&Digits[units][i]);
+        uint8_t posH = pgm_read_byte(&DigitsShifted[hundreds][i]);
+        uint8_t posT = pgm_read_byte(&DigitsShifted[tens][i]);
+        uint8_t posU = pgm_read_byte(&DigitsShifted[units][i]);
 
         if ((number >= 100 ) && posH != 0) {
             leds[(posH + place)] = c;

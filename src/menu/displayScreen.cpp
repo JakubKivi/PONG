@@ -1,17 +1,27 @@
 #include "Menu.h"
 
+#define THREE_DIGIT_INDEX 27
+
+#define RED_DOT_POSITION 1
+#define GREEN_DOT_POSITION 0
+#define BLUE_DOT_POSITION 5
+
+#define CURRENT_COLOR_POSITION 125
+#define CURRENT_COLOR_POSITION_2 126    
+#define CURRENT_COLOR_POSITION_3 127
+
 void Menu::displayScreen(){
     if (isSubmenu)
     {
         if (currentSubScreen == COLOR)
         {
-            leds[getLedIndex(0,7)] = currentColor;
-            leds[getLedIndex(0,8)] = currentColor;
-            leds[getLedIndex(0,9)] = currentColor;
+            leds[CURRENT_COLOR_POSITION] = currentColor;
+            leds[CURRENT_COLOR_POSITION_2] = currentColor;       \
+            leds[CURRENT_COLOR_POSITION_3] = currentColor;
             
-            leds[getLedIndex(6,6)] = CRGB(255,0,0);
-            leds[getLedIndex(6,8)] = CRGB(0,255,0);
-            leds[getLedIndex(6,10)] = CRGB(0,0,255);
+            leds[RED_DOT_POSITION] = CRGB::Red;
+            leds[GREEN_DOT_POSITION] = CRGB::Green;         
+            leds[BLUE_DOT_POSITION] = CRGB::Blue;
 
             if(inputBuffer==""){
                 if (millis() - lastBlinking_Time > 400)
@@ -23,16 +33,16 @@ void Menu::displayScreen(){
                     switch (currentInputColorIndex)
                     {
                     case 0:
-                        leds[getLedIndex(6,6)] = CRGB::Black;
-                        displayLongNumber(0, currentColor.r, CRGB(255,0,0));
+                        leds[RED_DOT_POSITION] = CRGB::Black;
+                        displayLongNumber(THREE_DIGIT_INDEX, currentColor.r, CRGB(255,0,0));
                         break;
                     case 1:
-                        leds[getLedIndex(6,8)] = CRGB::Black;
-                        displayLongNumber(0, currentColor.g, CRGB(0,255,0));
+                        leds[GREEN_DOT_POSITION] = CRGB::Black;
+                        displayLongNumber(THREE_DIGIT_INDEX, currentColor.g, CRGB(0,255,0));
                         break;
                     case 2:
-                        leds[getLedIndex(6,10)] = CRGB::Black;
-                        displayLongNumber(0, currentColor.b, CRGB(0,0,255));
+                        leds[BLUE_DOT_POSITION] = CRGB::Black;
+                        displayLongNumber(THREE_DIGIT_INDEX, currentColor.b, CRGB(0,0,255));
                         break;
                     default:
                         break;
@@ -42,13 +52,13 @@ void Menu::displayScreen(){
                 switch (currentInputColorIndex)
                 {
                 case 0:
-                    displayLongNumber(0, inputBuffer.toInt(), CRGB(255,0,0));
+                    displayLongNumber(THREE_DIGIT_INDEX, inputBuffer.toInt(), CRGB(255,0,0));
                     break;
                 case 1:
-                    displayLongNumber(0, inputBuffer.toInt(), CRGB(0,255,0));
+                    displayLongNumber(THREE_DIGIT_INDEX, inputBuffer.toInt(), CRGB(0,255,0));
                     break;
                 case 2:
-                    displayLongNumber(0, inputBuffer.toInt(), CRGB(0,0,255));
+                    displayLongNumber(THREE_DIGIT_INDEX, inputBuffer.toInt(), CRGB(0,0,255));
                     break;
                 default:
                     break;
@@ -56,15 +66,25 @@ void Menu::displayScreen(){
             }
             
         }else if(currentSubScreen == BRIGHTNESS){
-            Serial.print("Brightness Submenu");
-            Serial.print("       Manual Brightness:");
-            Serial.println(manualBrightness);
+            displayLongNumber(THREE_DIGIT_INDEX, inputBuffer.toInt(), currentColor);
             
         }else if (currentSubScreen == CURRENT_TIME)
         {
-            Serial.print("Current Time Submenu");
-            Serial.print("       Buffer:");
-            Serial.println(inputBuffer);
+            if (millis() - lastBlinking_Time > 250)
+            {
+                lastBlinking_Time = millis();
+                blinkState = !blinkState;
+            }
+            if(blinkState){
+                leds[64] = CRGB::Black;
+                leds[66] = CRGB::Black;     
+
+            }else{
+                leds[64] = currentColor;
+                leds[66] = currentColor;     
+            } 
+            displayNumber(0, (inputBuffer.toInt()-inputBuffer.toInt() % 100)/100, currentColor);
+            displayNumber(70, inputBuffer.toInt() % 100, currentColor);
         }
         
     }else{
@@ -85,7 +105,7 @@ void Menu::displayScreen(){
                     leds[66] = currentColor;     
                 }    
                 displayNumber(0, currentTime.hour, currentColor);
-                displayNumber(70, currentTime.minute, currentColor);// Serial.println(String(currenColor.r)+"," + String(currenColor.g) + "," + String(currenColor.b));
+                displayNumber(70, currentTime.minute, currentColor);
                 break;
             case SETTINGS:
                 leds[getLedIndex(0,7)] = currentColor;
