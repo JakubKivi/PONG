@@ -116,7 +116,7 @@ void Menu::update(char key){
                 case 'C':
                     break;
                 case '*':
-                    currentAnimationIndex = constrain(inputBuffer.toInt(), 0, 100);
+                    currentAnimationIndex = constrain(inputBuffer.toInt(), 0, Menu::animationListCount - 1);
                     inputBuffer = "";
                     break;
                 case '#':
