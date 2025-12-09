@@ -91,14 +91,24 @@ void Menu::displayScreen(){
         switch (currentScreen)
         {
             case TIME:
+                if(isBacklightAnimation){
+                    (this->*animationList[currentAnimationIndex])();
+                }else if(isBacklightOn){
+                    for(int i=0; i<128; i++){
+                        leds[i] = currentBacklightColor;
+                    }
+                }
+
                 if (millis() - lastBlinking_Time > 1000)
                 {
                     lastBlinking_Time = millis();
                     blinkState = !blinkState;
                 }
                 if(blinkState){
-                    leds[64] = CRGB::Black;
-                    leds[66] = CRGB::Black;     
+                    if(!isBacklightOn and !isBacklightAnimation){
+                        leds[64] = CRGB::Black;
+                        leds[66] = CRGB::Black; 
+                    }    
 
                 }else{
                     leds[64] = currentColor;
@@ -129,18 +139,7 @@ void Menu::displayScreen(){
                 leds[getLedIndex(6,9)] = currentColor;
                 break;   
             case ANIMATIONS:
-                Serial.print("Showing Animation: ");
-
-
-
-
-
-
-
-
-
-
-                Serial.println(currentAnimationIndex);
+                (this->*animationList[currentAnimationIndex])();
             default:
                 break;
         }

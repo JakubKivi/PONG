@@ -8,7 +8,6 @@ Menu::Menu(Keypad* keypad, DS1307* RTC, CRGB (&leds)[128], int fotresistorPin, i
     
 }
 
-
 MenuScreen Menu::getCurrentScreen() const{ 
     return currentScreen;
 }
@@ -117,4 +116,37 @@ void Menu::displayLongNumber(int place, int number, CRGB c) {
             leds[(posU + 56 + place)] = c; 
         }
     }
+}
+
+void (Menu::*Menu::animationList[])() = {
+    &Menu::rainbow,
+    &Menu::police
+};
+
+const int Menu::animationListCount = sizeof(Menu::animationList)/sizeof(Menu::animationList[0]);
+
+#define NUM_LEDS 128
+
+void Menu::rainbow(){
+    static uint8_t hue = 0;
+
+    // Built-in FastLED function to fill strip with changing colors
+    fill_rainbow(leds, NUM_LEDS, hue++, 7);
+}
+void Menu::police(){
+    static uint8_t step = 0;
+  
+  // Clear strip
+  fill_solid(leds, NUM_LEDS, CRGB::Black);
+
+  // Blink logic based on frame count
+  if ((step / 5) % 2 == 0) {
+    // Left side Red
+    fill_solid(leds, NUM_LEDS / 2, CRGB::Red);
+  } else {
+    // Right side Blue
+    fill_solid(leds + (NUM_LEDS / 2), NUM_LEDS / 2, CRGB::Blue);
+  }
+  
+  step++;
 }

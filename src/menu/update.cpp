@@ -107,7 +107,8 @@ void Menu::update(char key){
             switch (key)
             {
                 case 'A':
-                    currentAnimationIndex += 1;
+                    if(currentAnimationIndex < (Menu::animationListCount - 1))
+                        currentAnimationIndex += 1;
                     break;   
                 case 'B':
                     currentAnimationIndex>0 ? currentAnimationIndex -= 1 : currentAnimationIndex = 0;                    

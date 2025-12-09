@@ -37,7 +37,8 @@ private:
 
     int currentAnimationIndex = 0;
 
-    CRGB currentColor = CRGB::Red;
+    CRGB currentColor = CRGB(0xFF5500);
+    CRGB currentBacklightColor = CRGB(0x0022FF);
     int currentInputColorIndex =0;
 
     unsigned long lastUpdate_Time = 0;
@@ -45,6 +46,12 @@ private:
     bool blinkState = false;
 
     int manualBrightness = 15;
+
+    static void (Menu::*animationList[])();
+    static const int animationListCount;
+
+    void rainbow();
+    void police();
 
     void displayScreen();
     
