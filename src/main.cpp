@@ -58,6 +58,9 @@ void setup()
         RTC.startClock();
         menu.showErrorLed(2, false);
     }
+    tm now = RTC.getDateTime();
+    menu.setCurrentTime(TimeStruct(now.tm_hour, now.tm_min), false);
+    menu.updateBrightness();
 }
 
 void loop()
@@ -75,55 +78,6 @@ void loop()
 
     menu.updateTime();
 
-    // for(int i=0; i<17; i++){
-    //     leds[getLedIndex(0,i)] = CRGB(0,15,0); 
-    //     FastLED.show();
-    //     delay(10);
-    //     FastLED.clear();
-    // }
-    // for(int i=17; i>=0; i--){
-    //     leds[getLedIndex(1,i)] = CRGB(0,15,0); 
-    //     FastLED.show();
-    //     delay(10);
-    //     FastLED.clear();
-    // }
-    // for(int i=0; i<19; i++){
-    //     leds[getLedIndex(2,i)] = CRGB(0,15,0); 
-    //     FastLED.show();
-    //     delay(10);
-    //     FastLED.clear();
-    // }
-    // for(int i=19; i>=0; i--){
-    //     leds[getLedIndex(3,i)] = CRGB(0,15,0); 
-    //     FastLED.show();
-    //     delay(10);
-    //     FastLED.clear();
-    // }
-    // for(int i=0; i<19; i++){
-    //     leds[getLedIndex(4,i)] = CRGB(0,15,0); 
-    //     FastLED.show();
-    //     delay(10);
-    //     FastLED.clear();
-    // }
-    // for(int i=17; i>=0; i--){
-    //     leds[getLedIndex(5,i)] = CRGB(0,15,0); 
-    //     FastLED.show();
-    //     delay(10);
-    //     FastLED.clear();
-    // }
-    // for(int i=0; i<17; i++){
-    //     leds[getLedIndex(6,i)] = CRGB(0,15,0); 
-    //     FastLED.show();
-    //     delay(10);
-    //     FastLED.clear();
-    // }
-    // delay(2000000);
-
-
-    // Serial.print("Index: ");
-    // int a = getLedIndex(2,17);
-    // Serial.println(a);
-    // leds[a] = CRGB(0,15,0); 
     FastLED.show();
     delay(10);
     FastLED.clear();

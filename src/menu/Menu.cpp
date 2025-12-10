@@ -5,7 +5,6 @@ Menu::Menu(Keypad* keypad, DS1307* RTC, CRGB (&leds)[128], int fotresistorPin, i
     pinMode(fotresistorPin, INPUT);
     pinMode(errorLedPin, OUTPUT);
     digitalWrite(errorLedPin, LOW);
-    
 }
 
 MenuScreen Menu::getCurrentScreen() const{ 
@@ -67,7 +66,7 @@ const uint8_t Digits[10][10] PROGMEM =
 const uint8_t DigitsShifted[10][10] PROGMEM =
 {
   {1,2,4,5,8,18,16,12},
-  {8,18,10,8,12},
+  {8,18,10,16,12},
   {1,12,16,10,3,4,5,8},
   {1,12,16,10,3,18,8,5},
   {1,2,3,10,16,18,8},
@@ -149,4 +148,13 @@ void Menu::police(){
   }
   
   step++;
+}
+
+void Menu::updateBrightness(){
+    if (isAutoBrightness)
+    {
+        FastLED.setBrightness(constrain(map(analogRead(fotresistorPin), 30, 1000, 50, 255) , 50, 255));
+    }else{
+        FastLED.setBrightness(manualBrightness);
+    }
 }

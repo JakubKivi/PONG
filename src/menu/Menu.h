@@ -66,6 +66,7 @@ public:
 
     void updateTime();
     void update(char key);
+    void updateBrightness();
 
     MenuScreen getCurrentScreen() const;
 

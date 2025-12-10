@@ -47,6 +47,7 @@ void Menu::update(char key){
                 manualBrightness = value;
                 inputBuffer = "";
                 isSubmenu = false;
+                updateBrightness();
             }else if (currentSubScreen==CURRENT_TIME)
             {
                 TimeStruct value(
@@ -81,6 +82,7 @@ void Menu::update(char key){
             {
                 case 'A':
                     isAutoBrightness= !isAutoBrightness;
+                    updateBrightness();
                     break;
                 case 'B':
                     isBacklightOn = !isBacklightOn;
@@ -139,7 +141,7 @@ void Menu::update(char key){
 void Menu::updateTime(){
     unsigned long mils = millis();
 
-    if (mils - lastUpdate_Time >= 1000) { 
+    if (mils - lastUpdate_Time >= 10000) { 
         lastUpdate_Time = mils;
         
         tm now = RTC->getDateTime();
@@ -149,12 +151,7 @@ void Menu::updateTime(){
         currentDate.month = now.tm_mon;
         currentDate.year = now.tm_year + 1900;
         
-        if (isAutoBrightness)
-        {
-            FastLED.setBrightness(constrain(map(analogRead(fotresistorPin), 30, 1000, 50, 255) , 50, 255));
-        }else{
-            FastLED.setBrightness(manualBrightness);
-        }
+        updateBrightness();
     }  
 
     displayScreen();
