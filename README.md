@@ -16,12 +16,11 @@ Currently working on it...
 **⚙️ Screen: SETTINGS**
 
 - `A`: Submenu — **Color**
-- `B`: Submenu — **Brightness**
-
   — `A`: Set current color as **Text Color**.  
   — `B`: Set current color as **Background Color**.  
   — `*`: Confirm number input for R/G/B and switch to next color
-
+  — `#`: Clear input
+- `B`: Submenu — **Brightness**
 - `C`: Submenu — **Time**
 - `D`: Next Screen
 
