@@ -39,6 +39,8 @@ private:
 
     CRGB currentColor = CRGB(0xFF5500);
     CRGB currentBacklightColor = CRGB(0x0022FF);
+
+    CRGB currentInputColor = CRGB(0xFF5500);
     int currentInputColorIndex =0;
 
     unsigned long lastUpdate_Time = 0;

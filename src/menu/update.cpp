@@ -2,8 +2,6 @@
 #include "logic/TimeStruct.h"
 
 void Menu::update(char key){  
-    Serial.print("Key pressed: ");
-    Serial.println(key);       
     if (isSubmenu)
     {
         if(key>='0' && key<='9'){
@@ -30,13 +28,13 @@ void Menu::update(char key){
                     switch (currentInputColorIndex)
                     {
                     case 0:
-                        currentColor.r = value;
+                        currentInputColor.r = value;
                         break;
                     case 1:
-                        currentColor.g = value;
+                        currentInputColor.g = value;
                         break;
                     case 2:
-                        currentColor.b = value;
+                        currentInputColor.b = value;
                         break;
                     default:
                         break;
@@ -60,7 +58,15 @@ void Menu::update(char key){
                 isSubmenu = false;
             }
 
-        }else if(key=='D'){
+        }else if(key=='A'){
+                currentColor = currentInputColor;
+                isSubmenu = false;
+                inputBuffer = "";
+        }else if(key=='B'){
+                currentBacklightColor = currentInputColor;
+                isSubmenu = false;
+                inputBuffer = "";
+        } else if(key=='D'){
                 isSubmenu = false;
                 inputBuffer = "";
         }     

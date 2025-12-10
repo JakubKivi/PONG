@@ -15,9 +15,9 @@ void Menu::displayScreen(){
     {
         if (currentSubScreen == COLOR)
         {
-            leds[CURRENT_COLOR_POSITION] = currentColor;
-            leds[CURRENT_COLOR_POSITION_2] = currentColor;       \
-            leds[CURRENT_COLOR_POSITION_3] = currentColor;
+            leds[CURRENT_COLOR_POSITION] = currentInputColor;
+            leds[CURRENT_COLOR_POSITION_2] = currentInputColor;       \
+            leds[CURRENT_COLOR_POSITION_3] = currentInputColor;
             
             leds[RED_DOT_POSITION] = CRGB::Red;
             leds[GREEN_DOT_POSITION] = CRGB::Green;         
@@ -34,15 +34,15 @@ void Menu::displayScreen(){
                     {
                     case 0:
                         leds[RED_DOT_POSITION] = CRGB::Black;
-                        displayLongNumber(THREE_DIGIT_INDEX, currentColor.r, CRGB(255,0,0));
+                        displayLongNumber(THREE_DIGIT_INDEX, currentInputColor.r, CRGB(255,0,0));
                         break;
                     case 1:
                         leds[GREEN_DOT_POSITION] = CRGB::Black;
-                        displayLongNumber(THREE_DIGIT_INDEX, currentColor.g, CRGB(0,255,0));
+                        displayLongNumber(THREE_DIGIT_INDEX, currentInputColor.g, CRGB(0,255,0));
                         break;
                     case 2:
                         leds[BLUE_DOT_POSITION] = CRGB::Black;
-                        displayLongNumber(THREE_DIGIT_INDEX, currentColor.b, CRGB(0,0,255));
+                        displayLongNumber(THREE_DIGIT_INDEX, currentInputColor.b, CRGB(0,0,255));
                         break;
                     default:
                         break;

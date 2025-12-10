@@ -6,30 +6,37 @@ Currently working on it...
 
 ### 🕹️ Controls
 
-Button **D** cycles through the main screens (loop: Time -> Settings -> Animation).
+**🕒 Screen: TIME**
 
-- **🕒 Screen: TIME**
+- `A`: Toggle **Auto Brightness**
+- `B`: Toggle **Backlight**
+- `C`: Toggle **Background Animation**
+- `D`: Next Screen
 
-  - `A` – Toggle **Auto Brightness**
-  - `B` – Toggle **Backlight**
-  - `C` – Toggle **Background Animation**
+**⚙️ Screen: SETTINGS**
 
-- **⚙️ Screen: SETTINGS**
+- `A`: Submenu — **Color**
+- `B`: Submenu — **Brightness**
 
-  - `A` – Submenu: **Color**
-  - `B` – Submenu: **Brightness**
-  - `C` – Submenu: **Time**
+  — `A`: Set current color as **Text Color**.  
+  — `B`: Set current color as **Background Color**.  
+  — `*`: Confirm number input for R/G/B and switch to next color
 
-- **✨ Screen: ANIMATION**
-  - `A` – Next animation (+1)
-  - `B` – Previous animation (-1)
-  - `*` – Confirm number input (0-100)
-  - `#` – Clear input
+- `C`: Submenu — **Time**
+- `D`: Next Screen
+
+**✨ Screen: ANIMATION**
+
+- `A`: Next animation (+1)
+- `B`: Previous animation (-1)
+- `*`: Confirm number input (0–100)
+- `#`: Clear input
+- `D`: Next Screen
 
 ## About v1.1
 
-The display is made with ping pong balls (actually halves of them), backlighted with ws2812 diodes. Usually, it shows an actual time, which is loaded from DS1307 timer. The module has a small battery, so even if power is off, it knows what time it is. The display can show simple animations also (watch videos). I even tried to program a simple game (google dinosour game), but it is still in progress. Everything is controlled by an atmega328. Controller box has 3 buttons changing modes (the actual time, animations, a timer, dino-game), colors or brightness. In the end, I want it to be connected with "Jack".
+The display is made with ping pong balls (actually halves of them), backlit with WS2812 diodes. Usually it shows the current time, read from a DS1307 real-time clock. The module has a small battery so the clock keeps time when external power is removed. The display can show simple animations and there is a work-in-progress game inspired by the Chrome dinosaur game. Everything runs on an ATmega328. The controller box has buttons to change modes (Time, Animations, Timer, Dino-game), edit colors, and adjust brightness.
 
-More info [here](https://jakubkivi.github.io/#modalOpen).
+More info: https://jakubkivi.github.io/#modalOpen
 
 ![image](img/1.jpg)
