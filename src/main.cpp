@@ -78,7 +78,8 @@ void loop()
 
     menu.updateTime();
 
+    
     FastLED.show();
-    delay(10);
+    FastLED.delay(10);
     FastLED.clear();
 }
