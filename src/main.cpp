@@ -61,6 +61,7 @@ void setup()
     tm now = RTC.getDateTime();
     menu.setCurrentTime(TimeStruct(now.tm_hour, now.tm_min), false);
     menu.updateBrightness();
+    FastLED.setMaxRefreshRate(60); // Limit to 60 FPS
 }
 
 void loop()
@@ -80,6 +81,5 @@ void loop()
 
     
     FastLED.show();
-    FastLED.delay(10);
     FastLED.clear();
 }
