@@ -29,7 +29,9 @@ private:
     TimeStruct currentTime;
     DateStruct currentDate;
 
-    String inputBuffer = "";
+    // Use fixed-size char buffer to avoid dynamic heap fragmentation
+    char inputBuffer[6];
+    int inputBufferLen = 0;
 
     bool isAutoBrightness = false;  //TODO zmienić na true!!!!!!!!!!
     bool isBacklightOn = false;

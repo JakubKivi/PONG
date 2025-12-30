@@ -3,6 +3,8 @@
 #include <Keypad.h>
 #include <fastled.h>
 #include "logic/getLedIndex.h"
+#include <avr/wdt.h>
+#include <avr/io.h>
 
 #include "menu/Menu.h"
 
@@ -39,6 +41,20 @@ Menu menu(&keypad, &RTC, leds, FOTORESISTOR_PIN, ERROR_LED_PIN);
 void setup()
 {
     delay(1000); // Power-up safety delay
+        // Print reset reason (AVR only) to help debug unexpected restarts
+        if (Serial)
+        {
+        Serial.println("--- RESET INFO ---");
+        uint8_t mcusr = MCUSR;
+        Serial.print("MCUSR=0b"); Serial.println(mcusr, BIN);
+        if (mcusr & _BV(WDRF)) Serial.println("Reason: Watchdog Reset");
+        if (mcusr & _BV(BORF)) Serial.println("Reason: Brown-out Reset");
+        if (mcusr & _BV(EXTRF)) Serial.println("Reason: External Reset");
+        if (mcusr & _BV(PORF)) Serial.println("Reason: Power-on Reset");
+        MCUSR = 0;
+        wdt_disable();
+        Serial.println("------------------");
+        }
     Serial.begin(9600);
     Wire.begin();
     pinMode(ERROR_LED_PIN, OUTPUT);

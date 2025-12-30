@@ -5,24 +5,27 @@ void Menu::update(char key){
     if (isSubmenu)
     {
         if(key>='0' && key<='9'){
-            inputBuffer += key;
-            if((inputBuffer.length()>3 and currentSubScreen!=CURRENT_TIME )or
-               inputBuffer.length()>4){
-                inputBuffer="";
+            if (inputBufferLen < (int)sizeof(inputBuffer)-1) {
+                inputBuffer[inputBufferLen++] = key;
+                inputBuffer[inputBufferLen] = '\0';
             }
-            
+            if((inputBufferLen>3 && currentSubScreen!=CURRENT_TIME) || inputBufferLen>4){
+                inputBufferLen = 0;
+                inputBuffer[0] = '\0';
+            }
         }else if(key=='#'){
-            inputBuffer = "";
+            inputBufferLen = 0;
+            inputBuffer[0] = '\0';
 
         }else if(key=='*'){
-            int value = inputBuffer.toInt();
+            int value = atoi(inputBuffer);
             if ( value <3 )
                 value = 3;
             if ( value >255 )
                 value = 255;
             if (currentSubScreen==COLOR)
             {
-                if(inputBuffer.length()==0){
+                if(inputBufferLen==0){
                     //do nothing
                 }else{
                     switch (currentInputColorIndex)
@@ -40,36 +43,41 @@ void Menu::update(char key){
                         break;
                     }
                 }
-                inputBuffer = "";
+                inputBufferLen = 0;
+                inputBuffer[0] = '\0';
                 currentInputColorIndex = (currentInputColorIndex + 1) % 3;
             }else if(currentSubScreen==BRIGHTNESS)
             {
                 manualBrightness = value;
-                inputBuffer = "";
+                inputBufferLen = 0;
+                inputBuffer[0] = '\0';
                 isSubmenu = false;
                 updateBrightness();
             }else if (currentSubScreen==CURRENT_TIME)
             {
                 TimeStruct value(
-                    (inputBuffer.toInt()-inputBuffer.toInt() % 100)/100, 
-                    inputBuffer.toInt() % 100);
-
+                    (atoi(inputBuffer)-atoi(inputBuffer) % 100)/100, 
+                    atoi(inputBuffer) % 100);
                 RTC->setTime(value.hour, value.minute, 0);
-                inputBuffer = "";
+                inputBufferLen = 0;
+                inputBuffer[0] = '\0';
                 isSubmenu = false;
             }
 
         }else if(key=='A'){
                 currentColor = currentInputColor;
                 isSubmenu = false;
-                inputBuffer = "";
+                inputBufferLen = 0;
+                inputBuffer[0] = '\0';
         }else if(key=='B'){
                 currentBacklightColor = currentInputColor;
                 isSubmenu = false;
-                inputBuffer = "";
+                inputBufferLen = 0;
+                inputBuffer[0] = '\0';
         } else if(key=='D'){
                 isSubmenu = false;
-                inputBuffer = "";
+                inputBufferLen = 0;
+                inputBuffer[0] = '\0';
         }     
     }else{
         if(key=='D'){
@@ -124,14 +132,19 @@ void Menu::update(char key){
                 case 'C':
                     break;
                 case '*':
-                    currentAnimationIndex = constrain(inputBuffer.toInt(), 0, Menu::animationListCount - 1);
-                    inputBuffer = "";
+                        currentAnimationIndex = constrain(atoi(inputBuffer), 0, Menu::animationListCount - 1);
+                        inputBufferLen = 0;
+                        inputBuffer[0] = '\0';
                     break;
                 case '#':
-                    inputBuffer = "";
+                        inputBufferLen = 0;
+                        inputBuffer[0] = '\0';
                     break;
                 default:
-                    inputBuffer += key;
+                        if (inputBufferLen < (int)sizeof(inputBuffer)-1) {
+                            inputBuffer[inputBufferLen++] = key;
+                            inputBuffer[inputBufferLen] = '\0';
+                        }
                     break;
             }   
         }           
