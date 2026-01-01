@@ -15,6 +15,9 @@ void Menu::displayScreen(){
     {
         if (currentSubScreen == COLOR)
         {
+            Serial.print("[DisplayScreen] Submenu: COLOR        " );
+            Serial.print("  Input Buffer: ");
+            Serial.println(inputBuffer);
             leds[CURRENT_COLOR_POSITION] = currentInputColor;
             leds[CURRENT_COLOR_POSITION_2] = currentInputColor;       \
             leds[CURRENT_COLOR_POSITION_3] = currentInputColor;
@@ -66,10 +69,16 @@ void Menu::displayScreen(){
             }
             
         }else if(currentSubScreen == BRIGHTNESS){
+            Serial.print("[DisplayScreen] Submenu: BRIGHTNESS             ");
+            Serial.print("  Input Buffer: ");
+            Serial.println(inputBuffer);
             displayLongNumber(THREE_DIGIT_INDEX, atoi(inputBuffer), currentColor);
             
         }else if (currentSubScreen == CURRENT_TIME)
         {
+            Serial.print("[DisplayScreen] Submenu: CURRENT_TIME               ");
+            Serial.print("  Input Buffer: ");
+            Serial.println(inputBuffer);
             if (millis() - lastBlinking_Time > 250)
             {
                 lastBlinking_Time = millis();
@@ -94,6 +103,12 @@ void Menu::displayScreen(){
         switch (currentScreen)
         {
             case TIME:
+                Serial.print("  Current Time: ");
+                Serial.print(currentTime.hour);
+                Serial.print(":");
+                Serial.print(currentTime.minute);
+                Serial.print("     Current Fotoresistor Value: ");
+                Serial.println(analogRead(fotresistorPin));
                 if(isBacklightAnimation){
                     (this->*animationList[currentAnimationIndex])();
                 }else if(isBacklightOn){
@@ -121,6 +136,7 @@ void Menu::displayScreen(){
                 displayNumber(70, currentTime.minute, currentColor);
                 break;
             case SETTINGS:
+                Serial.println("[DisplayScreen] Screen: SETTINGS");
                 leds[getLedIndex(0,7)] = currentColor;
                 leds[getLedIndex(0,8)] = currentColor;
                 leds[getLedIndex(0,9)] = currentColor;
@@ -142,6 +158,7 @@ void Menu::displayScreen(){
                 leds[getLedIndex(6,9)] = currentColor;
                 break;   
             case ANIMATIONS:
+                Serial.println("[DisplayScreen] Screen: ANIMATIONS");
                 (this->*animationList[currentAnimationIndex])();
             default:
                 break;
