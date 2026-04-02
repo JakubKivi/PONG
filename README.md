@@ -38,6 +38,6 @@ Currently working on it...
 
 The display is made with ping pong balls (actually halves of them), backlit with WS2812 diodes. Usually it shows the current time, read from a DS1307 real-time clock. The module has a small battery so the clock keeps time when external power is removed. The display can show simple animations and there is a work-in-progress game inspired by the Chrome dinosaur game. Everything runs on an ATmega328. The controller box has buttons to change modes (Time, Animations, Timer, Dino-game), edit colors, and adjust brightness.
 
-More info: https://jakubkivi.github.io/#modalOpen
+More info: https://jakubkivi.github.io/#portfolio-modal-pong
 
 ![image](img/1.jpg)
