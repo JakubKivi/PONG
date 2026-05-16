@@ -33,8 +33,8 @@ private:
     char inputBuffer[6];
     int inputBufferLen = 0;
 
-    bool isAutoBrightness = false;  //TODO zmienić na true!!!!!!!!!!
-    bool isBacklightOn = false;
+    bool isAutoBrightness = true;  
+    bool isBacklightOn = true;
     bool isBacklightAnimation = false;
 
     int currentAnimationIndex = 0;
