@@ -78,11 +78,32 @@ void setup()
     menu.setCurrentTime(TimeStruct(now.tm_hour, now.tm_min), false);
     menu.updateBrightness();
     FastLED.setMaxRefreshRate(30); // Limit to 60 FPS
+    FastLED.clear();
 }
 
 void loop()
 {
+    
+    // for (int i = 0; i < NUM_LEDS; i++)
+    // {
+    //     leds[i] = CRGB::Red;
+    //     Serial.print("LED "); Serial.print(i); Serial.println(" ON");
+    //     delay(50);
+    //     FastLED.show();
+    //     leds[i] = CRGB::Black;
+    //     delay(10);
+    //     FastLED.show();
+    // }
 
+    // for (int i = 0; i < NUM_LEDS; i++)
+    // {
+    //     leds[i] = CRGB::Red;
+    //     FastLED.show();
+    // }
+    // delay(5000);
+    // FastLED.clear();
+    // delay(1000);
+    
     char key = keypad.getKey();
 
     if (key)
