@@ -75,6 +75,7 @@ void setup()
         menu.showErrorLed(2, false);
     }
     tm now = RTC.getDateTime();
+    menu.loadColorsFromNVRAM();
     menu.setCurrentTime(TimeStruct(now.tm_hour, now.tm_min), false);
     menu.updateBrightness();
     FastLED.setMaxRefreshRate(30); // Limit to 60 FPS

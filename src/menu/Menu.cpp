@@ -1,5 +1,8 @@
 #include "Menu.h"
 
+#define SAFE_NVRAM_ADDR 0
+NVRAM nvram;
+
 Menu::Menu(Keypad* keypad, DS1307* RTC, CRGB (&leds)[128], int fotresistorPin, int errorLedPin)
     : keypad(keypad), RTC(RTC), leds(leds), fotresistorPin(fotresistorPin), errorLedPin(errorLedPin){
     pinMode(fotresistorPin, INPUT);
@@ -160,4 +163,35 @@ void Menu::updateBrightness(){
     }else{
         FastLED.setBrightness(manualBrightness);
     }
+}
+
+
+void Menu::saveColorSettings(CRGB color, CRGB bgColor) {
+    nvram.write(SAFE_NVRAM_ADDR + 0, color.r);
+    nvram.write(SAFE_NVRAM_ADDR + 1, color.g);
+    nvram.write(SAFE_NVRAM_ADDR + 2, color.b);
+    
+    nvram.write(SAFE_NVRAM_ADDR + 3, bgColor.r);
+    nvram.write(SAFE_NVRAM_ADDR + 4, bgColor.g);
+    nvram.write(SAFE_NVRAM_ADDR + 5, bgColor.b);
+}
+
+ColorStruct Menu::readColorSettings() {
+    ColorStruct colors;
+    
+    colors.color.r = nvram.read(SAFE_NVRAM_ADDR + 0);
+    colors.color.g = nvram.read(SAFE_NVRAM_ADDR + 1);
+    colors.color.b = nvram.read(SAFE_NVRAM_ADDR + 2);
+    
+    colors.bgColor.r = nvram.read(SAFE_NVRAM_ADDR + 3);
+    colors.bgColor.g = nvram.read(SAFE_NVRAM_ADDR + 4);
+    colors.bgColor.b = nvram.read(SAFE_NVRAM_ADDR + 5);
+    
+    return colors;
+}
+
+void Menu::loadColorsFromNVRAM() {
+    ColorStruct colors = readColorSettings();
+    currentColor = colors.color;
+    currentBacklightColor = colors.bgColor;
 }

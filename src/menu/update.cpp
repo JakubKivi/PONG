@@ -69,11 +69,13 @@ void Menu::update(char key){
                 isSubmenu = false;
                 inputBufferLen = 0;
                 inputBuffer[0] = '\0';
+                saveColorSettings(currentColor, currentBacklightColor);
         }else if(key=='B'){
                 currentBacklightColor = currentInputColor;
                 isSubmenu = false;
                 inputBufferLen = 0;
                 inputBuffer[0] = '\0';
+                saveColorSettings(currentColor, currentBacklightColor);
         } else if(key=='D'){
                 isSubmenu = false;
                 inputBufferLen = 0;

@@ -9,6 +9,7 @@
 #include "logic/TimeStruct.h"
 #include "logic/DateStruct.h"
 #include "logic/getLedIndex.h"
+#include "logic/colorStruct.h"
 
 enum MenuScreen { TIME, SETTINGS, ANIMATIONS};
 enum MenuSubScreen {COLOR, BRIGHTNESS, CURRENT_TIME};
@@ -62,6 +63,9 @@ private:
     void displayNumber( int place , int number, CRGB c);
     void displayLongNumber( int place , int number, CRGB c);
 
+    void saveColorSettings(CRGB color, CRGB bgColor);
+    ColorStruct readColorSettings();
+
 public:
 
     Menu(Keypad* keypad,DS1307* RTC, CRGB (&leds)[128], int fotresistorPin, int errorLedPin);
@@ -69,6 +73,8 @@ public:
     void updateTime();
     void update(char key);
     void updateBrightness();
+
+    void loadColorsFromNVRAM();
 
     MenuScreen getCurrentScreen() const;
 
